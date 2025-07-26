@@ -1,48 +1,41 @@
 #main.py
 from tool.mutex import check_mutex, release_mutex
+from tool.download import download_video
+from tool.extract_audio import extract_audio
 
 import sys
 import logging
 
+video_url ='https://chzzk.naver.com/video/8440544'
+
 logging.basicConfig(
-    level=logging.INFO,  # DEBUG 이상의 로그만 출력
+    level=logging.DEBUG,  #CRITICAL ERROR WARNING INFO DEBUG  /NOTEST(전부)
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
-def main(input_file: str, output_dir: str):
+def main():
     if "venv" not in sys.executable:
-        raise RuntimeError(f"❌ 가상환경이 아님! 경로: {sys.executable}")
+        logging.debug(f"❌ 가상환경이 아님! 경로: {sys.executable}")
     else:
         print("✅ 가상환경 사용 중:", sys.executable)
-        print("Python 실행 경로:", sys.executable)
-
+    if not video_url.strip():
+        logging.debug("video_url이 비어 있어 다운로드를 건너뜁니다.")
+    else:
+        video_name = download_video(video_url)
+    extract_audio(video_name)
+    
 if __name__ == "__main__":
     # 중복 실행 방지
     if not check_mutex("Global\\MyApp_MeChuNow"):
-        print("프로그램이 이미 실행 중입니다. 종료합니다.")
+        logging.debug("프로그램이 이미 실행 중입니다. 종료합니다.")
         sys.exit(0)
-
     exit_code = 0
     try:
-        # 인수 확인
-        if len(sys.argv) < 3:
-            input_file = ".\\vods\\output_silent_10s.mp4"
-            output_dir = ".\\vods\\"
-            logging.info(f"argv 3개 미만, dump로 실행")
-        else:
-            input_file = sys.argv[1]
-            output_dir = sys.argv[2]
-
         # 주요 처리
-        main(input_file, output_dir)
-
+        main()
     except Exception as e:
         logging.error(f"오류 발생: {e}")
         exit_code = 1
-
     finally:
         # 항상 실행됨 → mutex 해제
         release_mutex()
-
-    # 종료 코드 반환
-    sys.exit(exit_code)

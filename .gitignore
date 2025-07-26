@@ -29,3 +29,5 @@ Thumbs.db
 vods/*
 !vods/vod/
 !vods/__init__.py
+
+oldstacks/*
