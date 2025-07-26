@@ -1,0 +1,31 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 환경 설정 파일
+.env
+*.env
+
+# 가상환경
+venv/
+.venv/
+
+# 로그 및 캐시
+*.log
+*.sqlite3
+
+# IDE 및 편집기 설정
+.vscode/
+.idea/
+
+# OS별 파일
+.DS_Store
+Thumbs.db
+
+#고용량 파일과 비밀번호 제외
+
+# 전체 vods 폴더 내부를 무시, 예외적으로 vods/vod/ 디렉토리와 기본파일은 포함
+vods/*
+!vods/vod/
+!vods/__init__.py
