@@ -1,153 +1,33 @@
-import sys
-import os
-import subprocess
-from pyannote.audio import Pipeline
-from pydub import AudioSegment
 import whisper
-from datetime import timedelta
-import torch
+import numpy as np
+import torchaudio
 
-# ==== 설정 ====
-INPUT_DIR = "vods/"
-INPUT_FILENAME_BASE = "Timeline 1"
-INPUT_EXT = "mp4"
+def load_audio_from_file(file_path: str, sr: int = 16000) -> tuple[np.ndarray, int]:
+    """
+    WAV 파일을 numpy 배열로 로드
+    """
+    waveform, sample_rate = torchaudio.load(file_path)
+    if sample_rate != sr:
+        waveform = torchaudio.transforms.Resample(orig_freq=sample_rate, new_freq=sr)(waveform)
+    return waveform.squeeze(0).numpy(), sr
 
-INPUT_FILENAME = f"{INPUT_FILENAME_BASE}.{INPUT_EXT}"
-INPUT_FILE = os.path.join(INPUT_DIR, INPUT_FILENAME)
 
-TEMP_WAV = "audio.wav"
-def load_token_from_file(path="token.txt") -> str:
-    try:
-        with open(path, "r", encoding="utf-8") as f:
-            return f.read().strip()
-    except FileNotFoundError:
-        raise RuntimeError(f"토큰 파일을 찾을 수 없습니다: {path}")
-HUGGINGFACE_TOKEN = load_token_from_file()
-WHISPER_MODEL = "medium"
+def transcribe_whisper(audio: np.ndarray, sr: int = 16000, model_size: str = "base") -> dict:
+    """
+    Whisper로 오디오를 텍스트로 변환
+    """
+    model = whisper.load_model(model_size)
+    result = model.transcribe(audio=audio, language="ko", fp16=False)
+    return result
 
-# ==== 디바이스 설정 ====
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print(f"⚙️ 사용 디바이스: {DEVICE}")
-
-# ==== 1. 오디오 추출 ====
-def extract_audio(input_path, output_wav):
-    try:
-        ext = os.path.splitext(input_path)[1].lower()
-        print(f"🎬 입력 파일: {input_path}")
-        if ext in [".mp4", ".mkv"]:
-            print(f"🔄 {ext[1:].upper()}에서 오디오 추출 중 (16000Hz, mono)...")
-            completed = subprocess.run([
-                "ffmpeg", "-y", "-i", input_path,
-                "-vn", "-acodec", "pcm_s16le", "-ar", "16000", "-ac", "1", output_wav
-            ], capture_output=True, text=True)
-            if completed.returncode != 0:
-                print(f"❌ ffmpeg 오류:\n{completed.stderr}")
-                sys.exit(1)
-            print(f"✅ 오디오 추출 완료 → {output_wav}")
-        else:
-            print("🎧 오디오 파일 변환 중 (16000Hz, mono)...")
-            audio = AudioSegment.from_file(input_path).set_frame_rate(16000).set_channels(1)
-            audio.export(output_wav, format="wav")
-            print(f"✅ 오디오 변환 완료 → {output_wav}")
-    except Exception as e:
-        print(f"❌ 오디오 추출/변환 중 예외 발생: {e}")
-        sys.exit(1)
-
-# ==== 2. 화자 분리 ====
-def diarize_audio(wav_path, token):
-    try:
-        print("🔍 화자 분리 모델 로딩 중...")
-        pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization", use_auth_token=token)
-        pipeline.to(DEVICE)  # ✅ CUDA 사용 명시
-        print("👤 화자 분리 수행 중...")
-        diarization = pipeline(wav_path)
-        print("✅ 화자 분리 완료")
-        return diarization
-    except Exception as e:
-        print(f"❌ 화자 분리 중 예외 발생: {e}")
-        sys.exit(1)
-
-# ==== 3. Whisper 음성 인식 ====
-def transcribe_segments(wav_path, diarization, model):
-    try:
-        print("🗣 Whisper 음성 인식 시작 (메모리 직접 처리)...")
-        audio = AudioSegment.from_wav(wav_path)
-        results = []
-        segments = list(diarization.itertracks(yield_label=True))
-        total = len(segments)
-        use_fp16 = DEVICE.type == "cuda"
-
-        for i, (turn, _, speaker) in enumerate(segments, 1):
-            percent = (i / total) * 100
-            print(f"▶ [{i}/{total}] ({percent:.1f}%) 화자: {speaker} | 시간: {turn.start:.1f}s ~ {turn.end:.1f}s")
-
-            start_ms = int(turn.start * 1000)
-            end_ms = int(turn.end * 1000)
-            segment = audio[start_ms:end_ms]
-
-            print("🔈 Whisper 처리 중 (RAM)...")
-            text = transcribe_audiosegment_in_memory(segment, model, str(DEVICE), use_fp16)
-
-            print(f"📝 인식 결과: {text[:50]}{'...' if len(text) > 50 else ''}")
-            results.append({
-                "start": turn.start,
-                "end": turn.end,
-                "speaker": speaker,
-                "text": text
-            })
-
-        print("✅ Whisper 인식 전체 완료")
-        return results
-
-    except Exception as e:
-        print(f"❌ Whisper 인식 중 예외 발생: {e}")
-        sys.exit(1)
-
-# ==== 4. 결과 출력 ====
-def format_time(seconds):
-    return str(timedelta(seconds=int(seconds)))
-
-def write_output(results, output_file="transcript.txt"):
-    try:
-        print(f"💾 결과 파일 저장 중 → {output_file}")
-        with open(output_file, "w", encoding="utf-8") as f:
-            for r in results:
-                f.write(f"[{format_time(r['start'])}] {r['speaker']}: {r['text']}\n")
-        print(f"✅ 저장 완료: {output_file}")
-    except Exception as e:
-        print(f"❌ 결과 저장 중 예외 발생: {e}")
-        sys.exit(1)
-
-# ==== 실행 ====
-def main():
-    if not os.path.exists(INPUT_FILE):
-        print("INPUT_FILE 경로:", INPUT_FILE)
-        print("파일 존재 여부:", os.path.exists(INPUT_FILE))
-        sys.exit(1)
-
-    extract_audio(INPUT_FILE, TEMP_WAV)
-
-    diarization = diarize_audio(TEMP_WAV, HUGGINGFACE_TOKEN)
-
-    try:
-        whisper_model = whisper.load_model(WHISPER_MODEL, device=str(DEVICE))  # ✅ CUDA 모델 로딩
-        print("📦 Whisper 모델 로딩 완료")
-    except Exception as e:
-        print(f"❌ Whisper 모델 로딩 중 예외 발생: {e}")
-        sys.exit(1)
-
-    results = transcribe_segments(TEMP_WAV, diarization, whisper_model)
-
-    # 임시 전체 오디오 파일 삭제
-    if os.path.exists(TEMP_WAV):
-        os.remove(TEMP_WAV)
-        print(f"🧹 임시 파일 삭제 완료: {TEMP_WAV}")
-        
-    # 출력 파일 이름 자동 생성 (mp3 → txt)
-    base_name = os.path.splitext(INPUT_FILENAME)[0]
-    output_txt = os.path.join(INPUT_DIR, f"{base_name}.txt")
-
-    write_output(results, output_txt)
 
 if __name__ == "__main__":
-    main()
+    # 1. WAV 파일 불러오기
+    wav_path = "example.wav"
+    audio_np, sr = load_audio_from_file(wav_path)
+
+    # 2. Whisper 인식
+    result = transcribe_whisper(audio_np, sr, model_size="base")
+
+    # 3. 출력
+    print(result["text"])
