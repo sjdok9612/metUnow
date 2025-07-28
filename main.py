@@ -18,11 +18,13 @@ def main():
         logging.debug(f"❌ 가상환경이 아님! 경로: {sys.executable}")
     else:
         print("✅ 가상환경 사용 중:", sys.executable)
+    
     if not video_url.strip():
         logging.debug("video_url이 비어 있어 다운로드를 건너뜁니다.")
     else:
         video_name = download_video(video_url)
-    extract_audio(video_name)
+        
+    #extract_audio(video_name)
     
 if __name__ == "__main__":
     # 중복 실행 방지
