@@ -31,8 +31,10 @@ vods/*
 !vods/__init__.py
 api/tokens/*
 !put_tokens_here.py
+!youtube_token_exmaple.txt
 output/*
 !build_be_here.py
+*.code-workspace
 
 oldstacks/*
 *.lnk

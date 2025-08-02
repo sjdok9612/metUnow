@@ -39,11 +39,13 @@ class YoutubeAPI:
 
 
 def is_live(channel_id: str) -> bool:
-    api = YoutubeAPI()   # 인스턴스 생성
-    key = api.get_key()
     """
+    channel_id : youtube uid, not handel name
     YouTube 채널에서 현재 라이브 방송 중인지 확인
     """
+    api = YoutubeAPI()   # 인스턴스 생성
+    key = api.get_key()
+    
     try:
         params = {
             "part": "snippet",
@@ -78,7 +80,8 @@ def main():
     
     #channel_id = "UCtLTQj-aLL3ov7AYEE2SofA"  #일반 버튜버 방송채널
     #channel_id = "UCF4Wxdo3inmxP-Y59wXDsFw"  #뉴스채널. 목적) 여러개의 라이브가 동시송출될때 응답의 구조 파악
-    channel_id ="UCJ46YTYBQVXsfsp8-HryoUA" #일반 버튜버 + 예약 라이브가 항상 달려있는채널 -> 예약라이브는 비어있는채로 나옴!
+    #channel_id ="UCJ46YTYBQVXsfsp8-HryoUA" #일반 버튜버 + 예약 라이브가 항상 달려있는채널 -> 예약라이브는 비어있는채로 나옴!
+    channel_id =""
     if is_live(channel_id):
         print("라이브 중입니다!")
     else:

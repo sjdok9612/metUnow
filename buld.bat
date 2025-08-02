@@ -6,7 +6,7 @@ set ORIGINAL_DIR=%CD%
 
 REM ======= 설정 =======
 set MAIN_FILE=main.py
-set APP_NAME=MyApp
+set APP_NAME=metUnow
 set OUTPUT_DIR=output
 set DIST_DIR=%OUTPUT_DIR%\dist
 set BUILD_DIR=%OUTPUT_DIR%\build

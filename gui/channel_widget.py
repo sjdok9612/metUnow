@@ -38,7 +38,7 @@ class ChannelStatusWidget(tk.Frame):
         self.label_twitter.bind("<Button-1>", self.on_twitter_click)
 
         self.grid_columnconfigure(1, minsize=105)
-        self.grid_columnconfigure(2, minsize=60)
+        self.grid_columnconfigure(2, minsize=80)
         self.grid_columnconfigure(3, minsize=50)
         self.grid_columnconfigure(4, minsize=50)
         self.grid_columnconfigure(5, minsize=50)
@@ -49,6 +49,8 @@ class ChannelStatusWidget(tk.Frame):
             webbrowser.open(self.chzzk_url)
         elif platform == "soop" and self.soop_url:
             webbrowser.open(self.soop_url)
+        elif platform == "youtube" and self.youtube_url:
+            webbrowser.open(self.youtube_url)
         else:
             print(f"플랫폼: {self.platform} 클릭됨, 열 URL 없음 또는 지원 안함")
 

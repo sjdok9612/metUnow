@@ -1,6 +1,6 @@
 from api.chzzk_api import get_channel_info as chzzk_get_channel_info, is_live as chzzk_is_live
 from api.soop_api import get_channel_info as soop_get_channel_info, is_live as soop_is_live
-from api.youtube_api import is_live as is_youtube_live
+from api.youtube_api import is_live as youtube_is_live
 from tool.downloader import run_yt_dlp
 from gui.notif import send_notification
 
@@ -36,6 +36,8 @@ def updateLive(channels_status, update_event, live_download=True):
                     liveFlag = chzzk_is_live(UID)
                 elif platform == "soop":
                     liveFlag = soop_is_live(UID)
+                elif platform == "yotubue" :
+                    liveFlag = youtube_is_live(UID)
                 else:
                     print("갱신오류")
                     continue
@@ -59,4 +61,4 @@ def updateLive(channels_status, update_event, live_download=True):
             update_event.set()
             
         # 루프가 너무 짧게 돌지 않도록 최소 대기
-        time.sleep(30)
+        time.sleep(60)
