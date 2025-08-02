@@ -1,11 +1,46 @@
 import requests
+import json
 
-YOUTUBE_API_KEY = "YOUR_API_KEY"  # ← 여기에 너의 유튜브 API 키를 넣어줘
 YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
 TIMEOUT = 5
+    
+class SecretString:
+    def __init__(self, value):
+        self._value = value
+
+    def __str__(self):
+        return "****"
+
+    def __repr__(self):
+        return "<SecretString ****>"
+
+    def get(self):
+        return self._value
+
+class YoutubeAPI:
+    def __init__(self):
+        import os
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        token_path = os.path.join(base_dir, "tokens", "youtube_token.txt")
+        try:
+            with open(token_path, "r", encoding="utf-8") as f:
+                raw_key = f.read().strip()
+                self.api_key = SecretString(raw_key)
+        except FileNotFoundError:
+            print("API 키 파일을 찾을 수 없습니다")
+            self.api_key = SecretString("")
+        except Exception as e:
+            print(f"API 키 로딩 중 오류: {e}")
+            self.api_key = SecretString("")
+
+    def get_key(self):
+        return self.api_key.get()
+    
 
 
-def is_youtube_live(channel_id: str) -> bool:
+def is_live(channel_id: str) -> bool:
+    api = YoutubeAPI()   # 인스턴스 생성
+    key = api.get_key()
     """
     YouTube 채널에서 현재 라이브 방송 중인지 확인
     """
@@ -15,13 +50,16 @@ def is_youtube_live(channel_id: str) -> bool:
             "channelId": channel_id,
             "eventType": "live",
             "type": "video",
-            "key": YOUTUBE_API_KEY,
+            "key": key,
         }
         headers = {"User-Agent": "Mozilla/5.0"}
         response = requests.get(YOUTUBE_SEARCH_URL, params=params, headers=headers, timeout=TIMEOUT)
         response.raise_for_status()
         data = response.json()
 
+        items = data.get("items", [])
+        print("items:", json.dumps(items, indent=4, ensure_ascii=False))
+        
         # items에 내용이 있으면 라이브 중
         return len(data.get("items", [])) > 0
 
@@ -36,12 +74,15 @@ def is_youtube_live(channel_id: str) -> bool:
 
 
 def main():
-    # 예시: Kim Luya 유튜브 채널 ID 넣어보세요
-    channel_id = "UCABCDEF1234567890"  # ← 너가 확인할 유튜브 채널 ID
-    if is_youtube_live(channel_id):
+    # # 예시: 유튜브 채널 ID 넣어보세요
+    
+    #channel_id = "UCtLTQj-aLL3ov7AYEE2SofA"  #일반 버튜버 방송채널
+    #channel_id = "UCF4Wxdo3inmxP-Y59wXDsFw"  #뉴스채널. 목적) 여러개의 라이브가 동시송출될때 응답의 구조 파악
+    channel_id ="UCJ46YTYBQVXsfsp8-HryoUA" #일반 버튜버 + 예약 라이브가 항상 달려있는채널 -> 예약라이브는 비어있는채로 나옴!
+    if is_live(channel_id):
         print("라이브 중입니다!")
     else:
-        print("현재 라이브가 아닙니다.")
+        print("현재 라이브중인지 파악 불가능!")
 
 
 if __name__ == "__main__":

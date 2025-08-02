@@ -29,7 +29,7 @@ Thumbs.db
 vods/*
 !vods/vod/
 !vods/__init__.py
-tokens/*
+api/tokens/*
 !put_tokens_here.py
 output/*
 !build_be_here.py

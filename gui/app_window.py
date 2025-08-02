@@ -49,9 +49,11 @@ class AppWindow:
         self.root.withdraw()  # 창 숨기기
 
     def exit_app(self):
-        self.icon.stop()
-        self.root.quit()
-        sys.exit(0)
+        self.update_event.set()          # 스레드 종료 요청
+        self.tray_icon.stop()            # 트레이 아이콘 종료 (변수명 수정)
+        self.root.quit()                 # tkinter 루프 종료
+        self.root.destroy()              # 창 완전 종료
+        sys.exit(0)                      # 프로세스 완전 종료
 
     def check_for_update(self):
         if self.update_event.is_set():
