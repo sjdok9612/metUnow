@@ -1,8 +1,8 @@
 
 ## streamer.json에 작성된 스트리머의 방송ON/OFF를 체크하는 윈도우앱
 미리 작성된 유저에 대해 방송 on/off 여부와, 링크바로가기(클릭)을 제공합니다.<br>
-![대체 텍스트](images/sammple.png)<br>
-![대체 텍스트2](images/sammple2.png)<br>
+![대체 텍스트](images/sample.png)<br>
+![대체 텍스트2](images/sample2.png)<br>
 ## config.json의 auto-download 기능을 True로 설정하면
 해당 방송인이 방송을 켰을때 자동으로 녹화가 시작됩니다. (FALSE를 권장합니다) <br>
 VOD 다운로드는 기본적으로 통용되는 수준에서 체크했습니다 (5분할 고속다운로드 + m3u8기준 최고화질)<br>
