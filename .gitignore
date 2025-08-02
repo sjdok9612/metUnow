@@ -29,7 +29,10 @@ Thumbs.db
 vods/*
 !vods/vod/
 !vods/__init__.py
-token.txt
+tokens/*
+!put_tokens_here.py
+output/*
+!build_be_here.py
 
 oldstacks/*
 *.lnk
