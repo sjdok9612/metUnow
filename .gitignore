@@ -32,3 +32,5 @@ vods/*
 token.txt
 
 oldstacks/*
+*.lnk
+output/*
