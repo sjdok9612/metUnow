@@ -31,3 +31,5 @@ def load_channels_status(json_path="streamers.json") -> list[ChannelStatus]:
         )
         channels_status.append(channel_status)
     return channels_status
+
+

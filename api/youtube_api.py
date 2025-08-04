@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 
 YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
 TIMEOUT = 5
@@ -19,9 +20,14 @@ class SecretString:
 
 class YoutubeAPI:
     def __init__(self):
-        import os
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        token_path = os.path.join(base_dir, "tokens", "youtube_token.txt")
+        
+        base_dir = os.path.dirname(os.path.abspath(__file__))  # 현재 파일 위치
+        if os.path.isfile(base_dir):#실행주체가 main.py일경우
+            token_path = os.path.join(base_dir, "tokens", "youtube_token.txt")    
+        else:
+            parent_dir = os.path.dirname(base_dir)  # 그 상위 폴더
+            token_path = os.path.join(parent_dir, "tokens", "youtube_token.txt")    
+        
         try:
             with open(token_path, "r", encoding="utf-8") as f:
                 raw_key = f.read().strip()
@@ -35,8 +41,6 @@ class YoutubeAPI:
 
     def get_key(self):
         return self.api_key.get()
-    
-
 
 def is_live(channel_id: str) -> bool:
     """
@@ -45,7 +49,6 @@ def is_live(channel_id: str) -> bool:
     """
     api = YoutubeAPI()   # 인스턴스 생성
     key = api.get_key()
-    
     try:
         params = {
             "part": "snippet",
@@ -59,8 +62,8 @@ def is_live(channel_id: str) -> bool:
         response.raise_for_status()
         data = response.json()
 
-        items = data.get("items", [])
-        print("items:", json.dumps(items, indent=4, ensure_ascii=False))
+        #items = data.get("items", [])
+        #print("items:", json.dumps(items, indent=4, ensure_ascii=False))
         
         # items에 내용이 있으면 라이브 중
         return len(data.get("items", [])) > 0
@@ -81,7 +84,7 @@ def main():
     #channel_id = "UCtLTQj-aLL3ov7AYEE2SofA"  #일반 버튜버 방송채널
     #channel_id = "UCF4Wxdo3inmxP-Y59wXDsFw"  #뉴스채널. 목적) 여러개의 라이브가 동시송출될때 응답의 구조 파악
     #channel_id ="UCJ46YTYBQVXsfsp8-HryoUA" #일반 버튜버 + 예약 라이브가 항상 달려있는채널 -> 예약라이브는 비어있는채로 나옴!
-    channel_id =""
+    channel_id ="UCPUcv2Zv9WhH6y8H1A9uWfg"
     if is_live(channel_id):
         print("라이브 중입니다!")
     else:

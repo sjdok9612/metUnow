@@ -24,41 +24,38 @@ def updateLive(channels_status, update_event, live_download=True):
             time_since_last = now - last_checked[UID]
 
             # 아직 체크할 시간이 안 됐으면 skip
-            if time_since_last < check_interval:
-                continue
+            if time_since_last > check_interval:
+                # === 체크 시각 갱신 ===
+                last_checked[UID] = now
 
-            # === 체크 시각 갱신 ===
-            last_checked[UID] = now
-
-            # === API 호출 ===
-            try:
-                if platform == "chzzk":
-                    liveFlag = chzzk_is_live(UID)
-                elif platform == "soop":
-                    liveFlag = soop_is_live(UID)
-                elif platform == "yotubue" :
-                    liveFlag = youtube_is_live(UID)
-                else:
-                    print("갱신오류")
+                # === API 호출 ===
+                try:
+                    if platform == "chzzk":
+                        liveFlag = chzzk_is_live(UID)
+                    elif platform == "soop":
+                        liveFlag = soop_is_live(UID)
+                    elif platform == "youtube" :
+                        liveFlag = youtube_is_live(UID)
+                    else:
+                        logging.warning(f"{channel.name} is_live ERROR")
+                        continue
+                except Exception as e:
+                    logging.warning(f"{channel.name} API 호출 실패: {e}")
                     continue
-            except Exception as e:
-                logging.warning(f"{channel.name} API 호출 실패: {e}")
-                continue
 
-            # 상태 변경 감지 시
-            if liveFlag != channel.is_live:
-                
-                logging.info(f"{channel.name} 방송상태변경됌")
-                if liveFlag==True:
-                    send_notification(f"{channel.nickname} 방송ON")
-                else:
-                    send_notification(f"{channel.nickname} 방송OFF")
-
-            channel.is_live = liveFlag
-
-            # 채널 간 간격 조절
-            time.sleep(4)  # 너무 빠른 호출 방지
-            update_event.set()
-            
-        # 루프가 너무 짧게 돌지 않도록 최소 대기
-        time.sleep(60)
+                # 상태 변경 감지 시
+                if liveFlag != channel.is_live:
+                    
+                    logging.info(f"{channel.name} 방송상태변경됌")
+                    if liveFlag==True:
+                        send_notification(f"{channel.nickname} 방송ON")
+                    else:
+                        send_notification(f"{channel.nickname} 방송OFF")
+                logging.info(f"CHECK    {channel.name}  {liveFlag}")
+                channel.is_live = liveFlag
+                # 채널 간 간격 조절
+                time.sleep(1)  # 너무 빠른 호출 방지
+                update_event.set()
+            else:
+                logging.info(f"SKIP {channel.name} {time_since_last:3.1f} / {check_interval}")
+                time.sleep(0.5)

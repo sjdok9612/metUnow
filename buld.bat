@@ -63,6 +63,17 @@ if exist "%ORIGINAL_DIR%\streamers.json" (
     echo WARNING: streamers.json not found in "%ORIGINAL_DIR%"
 )
 
+REM tokens 디렉토리 복사
+echo.
+echo Copying tokens directory...
+
+if exist "%ORIGINAL_DIR%\tokens" (
+    xcopy /E /I /Y "%ORIGINAL_DIR%\tokens" "%EXE_FOLDER%\tokens"
+    echo tokens directory copied.
+) else (
+    echo WARNING: tokens directory not found in "%ORIGINAL_DIR%"
+)
+
 :end
 pause
 
