@@ -1,7 +1,8 @@
 #main.py
 from api.liveCheck import updateLive
 from gui.app_window import AppWindow
-from tool.channels import load_channels_status
+
+from tool.Streamers import load_streamers
 from tool.config import load_config
 from tool.mutex import check_mutex, release_mutex
 
@@ -18,11 +19,11 @@ def main():
     config = load_config()
     live_download = config.get("live_download", True)  # 기본 True
     
-    channels_status = load_channels_status()    
+    Streamers = load_streamers("streamers.json")    
     update_event = threading.Event()
-    threading.Thread(target=updateLive, args=(channels_status, update_event,live_download), daemon=True).start()
+    threading.Thread(target=updateLive, args=(Streamers, update_event,live_download), daemon=True).start()
     
-    app = AppWindow(channels_status, update_event)  # 이벤트 넘김
+    app = AppWindow(Streamers, update_event)
     app.run()
 
 if __name__ == "__main__":
