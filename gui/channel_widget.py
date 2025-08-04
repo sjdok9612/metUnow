@@ -11,7 +11,7 @@ class ChannelStatusWidget(tk.Frame):
 
         self.index = Streamer.index
         self.name = Streamer.name
-        self.oshi_makr = Streamer.oshi_mark
+        self.oshi_mark = Streamer.oshi_mark
         self.UID = Streamer.UID
         self.main_platform = Streamer.main_platform
         self.name = Streamer.oshi_mark

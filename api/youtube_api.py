@@ -42,7 +42,7 @@ class YoutubeAPI:
     def get_key(self):
         return self.api_key.get()
 
-def is_live(channel_id: str) -> bool:
+def is_live(uid: str) -> bool:
     """
     channel_id : youtube uid, not handel name
     YouTube 채널에서 현재 라이브 방송 중인지 확인
@@ -52,7 +52,7 @@ def is_live(channel_id: str) -> bool:
     try:
         params = {
             "part": "snippet",
-            "channelId": channel_id,
+            "channelId": uid,
             "eventType": "live",
             "type": "video",
             "key": key,

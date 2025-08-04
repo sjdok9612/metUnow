@@ -31,12 +31,12 @@ def get_channel_info(uid: str) -> dict:
         print(f"알 수 없는 오류: {e}")        
     return {}
 
-def is_live(UID: str) -> bool:
+def is_live(uid: str) -> bool:
     """
     치지직 방송 중인지 확인
     """
     try:
-        url = CHZZK_API_URL.format(UID)
+        url = CHZZK_API_URL.format(uid)
         headers = {"User-Agent": "Mozilla/5.0"}
         r = requests.get(url, headers=headers, timeout=TIMEOUT)
         r.raise_for_status()

@@ -2,7 +2,7 @@
 from api.liveCheck import updateLive
 from gui.app_window import AppWindow
 
-from tool.Streamers import load_streamers
+from tool.Streamers import load_streamer_dict_from_json
 from tool.config import load_config
 from tool.mutex import check_mutex, release_mutex
 
@@ -17,13 +17,13 @@ logging.basicConfig(
 
 def main():
     config = load_config()
-    live_download = config.get("live_download", True)  # 기본 True
+    live_download = config.get("live_download", False)  # 기본 False
     
-    Streamers = load_streamers("streamers.json")    
+    streamer_dict = load_streamer_dict_from_json("streamers.json")    
     update_event = threading.Event()
-    threading.Thread(target=updateLive, args=(Streamers, update_event,live_download), daemon=True).start()
+    threading.Thread(target=updateLive, args=(streamer_dict, update_event,live_download), daemon=True).start()
     
-    app = AppWindow(Streamers, update_event)
+    app = AppWindow(streamer_dict, update_event)
     app.run()
 
 if __name__ == "__main__":
