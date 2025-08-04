@@ -9,17 +9,17 @@ class AppWindow:
     def __init__(self, Streamers, update_event):
         self.root = tk.Tk()
         self.root.title("Met U Now")
-        self.root.configure(bg="#9E9E9E")
+        self.root.configure(bg="#080808")
         self.Streamers = Streamers
         self.update_event = update_event
         self.widgets = []
 
-        for Streamer in Streamers:
-            widget = ChannelStatusWidget(self.root, Streamer)
+        for streamer in Streamers.values():
+            widget = ChannelStatusWidget(self.root, streamer)
             widget.grid(sticky='w', pady=2, padx=4)
             self.widgets.append({
                 "widget": widget,
-                "Streamer": Streamer
+                "streamer": streamer
             })
 
         self.root.update_idletasks()
@@ -53,8 +53,8 @@ class AppWindow:
         if self.update_event.is_set():
             for item in self.widgets:
                 widget = item["widget"]
-                Streamer = item["Streamer"]
-                widget.update_status(Streamer.is_live)
+                streamer = item["streamer"]
+                widget.update_status(streamer.is_live)
             logging.debug("GUI 갱신")
             self.update_event.clear()
         self.root.after(1000, self.check_for_update)

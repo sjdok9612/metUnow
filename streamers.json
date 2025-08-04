@@ -5,7 +5,7 @@
         "live_url": "https://chzzk.naver.com/live/bd86979dd88a1066915c02f20b5b63c4",
         "uid": "bd86979dd88a1066915c02f20b5b63c4",
         "extra": {
-            "oshi_mark": "8️⃣",
+            "oshi_mark": "eɘ",
             "youtube_url": "https://www.youtube.com/@%EB%AF%B8%EC%B8%84meechu",
             "fan_cafe": "https://cafe.naver.com/f-e/cafes/31103060/menus/1?viewType=L",
             "twitter_url": "https://x.com/meechu_official",
@@ -23,6 +23,19 @@
             "fan_cafe": "https://cafe.naver.com/f-e/cafes/30884052/menus/44?viewType=L",
             "twitter_url": "https://x.com/Omong_2",
             "chzzk_url":"https://chzzk.naver.com/live/d2fb83a5db130bf4d273c981b82ca41f"
+        }
+    },
+    {   
+        "key" : "hebi",
+        "name": "헤비",
+        "live_url": "https://www.youtube.com/@%ED%97%A4%EB%B9%84_Hebi",
+        "uid": "UCPUcv2Zv9WhH6y8H1A9uWfg",
+        "extra": {
+            "oshi_mark": "🐍",
+            "youtube_url": "https://www.youtube.com/@%EC%9D%B4%EC%98%A4%EB%AA%BD",
+            "fan_cafe": "",
+            "twitter_url": "https://x.com/hebi0211",
+            "youtube_contents_url":"https://www.youtube.com/@%ED%97%A4%EB%B9%84_Hebi"
         }
     },
     {   
