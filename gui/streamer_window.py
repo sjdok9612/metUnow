@@ -35,7 +35,7 @@ class StreamerLinkRow(tk.Frame):
         for key, label in LINK_LABELS.items():
             url = self.streamer.get_extra_field(key)
             if url:
-                btn = tk.Label(self, text=label, fg="white", bg="#3b3b3b", cursor="hand2", font=self.font_normal)
+                btn = tk.Label(self, text=label, fg="white", bg="#1D1D1D", cursor="hand2", font=self.font_normal)
                 btn.bind("<Button-1>", lambda e, link=url: webbrowser.open(link))
                 self.link_buttons.append(btn)
         #라벨그리드
@@ -72,6 +72,6 @@ class StreamerLinkRow(tk.Frame):
     
     def update_status(self, is_live: bool):
         if is_live:
-            self.label_name.config(fg="blue", font=self.font_bold)
+            self.label_name.config(fg="#F3F3F3", font=self.font_normal)
         else:
-            self.label_name.config(fg="#ADADAD", font=self.font_normal)  # 연한 회색
+            self.label_name.config(fg="#747474", font=self.font_normal)  # 연한 회색
