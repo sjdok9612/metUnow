@@ -35,6 +35,7 @@ vods/*
 output/*
 !build_be_here.py
 *.code-workspace
+!Public_metUnow.code-workspace
 
 oldstacks/*
 *.lnk

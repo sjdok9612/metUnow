@@ -1,4 +1,4 @@
-from gui.channel_widget import ChannelStatusWidget
+from gui.streamer_window import StreamerLinkRow
 from gui.tray_icon import TrayIcon
 
 import logging
@@ -15,8 +15,8 @@ class AppWindow:
         self.widgets = []
 
         for streamer in Streamers.values():
-            widget = ChannelStatusWidget(self.root, streamer)
-            widget.grid(sticky='w', pady=2, padx=4)
+            widget = StreamerLinkRow(self.root, streamer)
+            widget.grid(sticky='w', pady=4, padx=4)
             self.widgets.append({
                 "widget": widget,
                 "streamer": streamer

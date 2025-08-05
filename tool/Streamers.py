@@ -12,9 +12,15 @@ class Streamer:
     extra_fields: Dict[str, Any] = field(default_factory=dict)
     
     def get_extra_field(self, key: str, default=None):
-        """fan_cafe_url = hebi.get_extra_field('fan_cafe')"""
+        """contents ch = hebi.get_extra_field('youtube_contents_url')"""
         return self.extra_fields.get(key, default)
     
+    """
+    def :key, name, live_url, uid, is_live
+    others: oshi_mark, youtube_url, official_community_url, twitter_url,
+     soop_url,chzzk_url,youtube_contents_url,youtube_music_url,
+    """
+
     @classmethod
     def from_dict(cls, data: dict, index: int = 0):
         return cls(
