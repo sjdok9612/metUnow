@@ -1,6 +1,8 @@
 import tkinter as tk
 import webbrowser
 
+#https://chatgpt.com/share/689712f8-60e0-8012-8120-cf0352a4e957
+
 class StreamerLinkRow(tk.Frame):
     def __init__(self, master, streamer, *args, **kwargs):
         super().__init__(master, *args, **kwargs)
@@ -30,6 +32,8 @@ class StreamerLinkRow(tk.Frame):
             "chzzk_url": "Chzzk",
             "youtube_contents_url": "ch.콘텐츠",
             "youtube_music_url": "ch.뮤직",
+            "vod_url" : "vod채널",
+            "bob_url" : "서브채널"
         }
         self.link_buttons = []
         for key, label in LINK_LABELS.items():

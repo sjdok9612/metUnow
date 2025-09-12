@@ -1,5 +1,123 @@
 [
     {
+        "key": "luya",
+        "name": "김루야",
+        "live_url": "https://chzzk.naver.com/live/324423cf78e5f3cd04423453cf8f1299",
+        "uid": "324423cf78e5f3cd04423453cf8f1299",
+        "extra": {
+            "oshi_mark": "💙🐟 ⚓",
+            "youtube_url": "https://www.youtube.com/@%EA%B9%80%EB%A3%A8%EC%95%BC",
+            "official_community_url": "https://cafe.naver.com/f-e/cafes/30960354/menus/8?viewType=L",
+            "twitter_url": "https://x.com/LUYA_Y"
+        }
+    },
+    {
+        "key": "canny",
+        "name": "캐니",
+        "live_url": "https://chzzk.naver.com/live/63d1d26a9dbf5ade38d4fb51b960064d",
+        "uid": "63d1d26a9dbf5ade38d4fb51b960064d",
+        "extra": {
+            "oshi_mark": "🛸",
+            "youtube_url": "https://www.youtube.com/@Canny_vtuber",
+            "official_community_url": "https://cafe.naver.com/cannyvt",
+            "twitter_url": "https://x.com/Canny_vt",
+            "chzzk_url": "https://chzzk.naver.com/live/63d1d26a9dbf5ade38d4fb51b960064d"
+        }
+    },
+    {
+        "key": "akuru",
+        "name": "아쿠루",
+        "live_url": "https://chzzk.naver.com/live/78cc61cc55bb3fad7f027d717ce61630",
+        "uid": "78cc61cc55bb3fad7f027d717ce61630",
+        "extra": {
+            "oshi_mark": "📜💀",
+            "youtube_url": "https://www.youtube.com/@쿠루",
+            "official_community_url": "https://cafe.naver.com/f-e/cafes/30891067/menus/9?viewType=L",
+            "twitter_url": "https://x.com/Akuru_666",
+            "chzzk_url": "https://chzzk.naver.com/live/78cc61cc55bb3fad7f027d717ce61630",
+            "youtube_music_url": "https://www.youtube.com/@아쿠루"
+        }
+    },
+    {
+        "key": "kanaph",
+        "name": "카나프",
+        "live_url": "https://chzzk.naver.com/live/852d27f701a047c7dba8ca41cd88e319",
+        "uid": "852d27f701a047c7dba8ca41cd88e319",
+        "extra": {
+            "oshi_mark": "📜💐",
+            "youtube_url": "https://www.youtube.com/@kanaph",
+            "official_community_url": "https://cafe.naver.com/f-e/cafes/30891067/menus/9?viewType=L",
+            "twitter_url": "https://x.com/_kanaph",
+            "chzzk_url": "https://chzzk.naver.com/live/852d27f701a047c7dba8ca41cd88e319"
+        }
+    },
+    {
+        "key": "azael",
+        "name": "아자엘",
+        "live_url": "https://chzzk.naver.com/live/96be3d27abcfe176659dbabb18464d0a",
+        "uid": "96be3d27abcfe176659dbabb18464d0a",
+        "extra": {
+            "oshi_mark": "📜🔱",
+            "youtube_url": "https://www.youtube.com/@A_zael",
+            "official_community_url": "https://cafe.naver.com/f-e/cafes/30891067/menus/9?viewType=L",
+            "twitter_url": "https://x.com/A_zael_",
+            "chzzk_url": "https://chzzk.naver.com/live/96be3d27abcfe176659dbabb18464d0a"
+        }
+    },
+    {
+        "key": "sorae",
+        "name": "소래",
+        "live_url": "https://chzzk.naver.com/live/a983cb143857c78943617b08ac58f46f",
+        "uid": "a983cb143857c78943617b08ac58f46f",
+        "extra": {
+            "oshi_mark": "🌊🦈",
+            "youtube_url": "https://www.youtube.com/channel/UCcu2ZNJEvBQ47inEDMeGOoQ",
+            "official_community_url": "https://cafe.naver.com/sharkiarium",
+            "twitter_url": "https://x.com/sorae__NIM",
+            "vod_url" : "https://www.youtube.com/channel/UCkJAbV9J6yws7sEAvl5uoTw"
+        }
+    },
+    {
+        "key": "yuucha",
+        "name": "유우차",
+        "live_url": "https://chzzk.naver.com/live/4f9963668012f5b4d4c2647eb77820e6",
+        "uid": "4f9963668012f5b4d4c2647eb77820e6",
+        "extra": {
+            "oshi_mark": "🚩🐤",
+            "youtube_url": "https://www.youtube.com/@YUUCHA_official",
+            "official_community_url": "https://cafe.naver.com/yuuchav",
+            "twitter_url": "https://x.com/yuucha0626",
+            "vod_url" : "https://www.youtube.com/@YUUCHA_flag"
+        }
+    },
+    {
+        "key": "Tamrang",
+        "name": "탐랑",
+        "live_url": "https://chzzk.naver.com/live/fc62be23517b28eb8c554370aa1eca56",
+        "uid": "fc62be23517b28eb8c554370aa1eca56",
+        "extra": {
+            "oshi_mark": "🐺💛",
+            "youtube_url": "https://www.youtube.com/@Tam_Rang",
+            "official_community_url": "https://cafe.naver.com/tamrang",
+            "twitter_url": "https://x.com/Tam_Rang",
+            "vod_url" : "https://www.youtube.com/@%ED%83%90%EB%9E%91%EB%8B%A4%EC%8B%9C%EB%B3%B4%EA%B8%B0",
+            "bob_url" : "https://www.youtube.com/@BobRang-p2d"
+        }
+    },
+    {
+        "key": "hongkun",
+        "name": "홍쿤",
+        "live_url": "https://chzzk.naver.com/live/2a50498a502e93d7966c4210df5fd378",
+        "uid": "2a50498a502e93d7966c4210df5fd378",
+        "extra": {
+            "oshi_mark": "🐱",
+            "youtube_url": "https://www.youtube.com/@hongkun_",
+            "official_community_url": "https://cafe.naver.com/twhongkun",
+            "twitter_url": "https://x.com/v_hongkun",
+            "vod_url" : "https://www.youtube.com/@rehongkun"
+        }
+    },
+    {
         "key": "meechu",
         "name": "미츄",
         "live_url": "https://chzzk.naver.com/live/bd86979dd88a1066915c02f20b5b63c4",
@@ -78,31 +196,6 @@
         }
     },
     {
-        "key": "canny",
-        "name": "캐니",
-        "live_url": "https://chzzk.naver.com/live/63d1d26a9dbf5ade38d4fb51b960064d",
-        "uid": "63d1d26a9dbf5ade38d4fb51b960064d",
-        "extra": {
-            "oshi_mark": "🛸",
-            "youtube_url": "https://www.youtube.com/@Canny_vtuber",
-            "official_community_url": "https://cafe.naver.com/cannyvt",
-            "twitter_url": "https://x.com/Canny_vt",
-            "chzzk_url": "https://chzzk.naver.com/live/63d1d26a9dbf5ade38d4fb51b960064d"
-        }
-    },
-    {
-        "key": "luya",
-        "name": "김루야",
-        "live_url": "https://www.youtube.com/@%ED%97%A4%EB%B9%84_Hebi",
-        "uid": "UCPUcv2Zv9WhH6y8H1A9uWfg",
-        "extra": {
-            "oshi_mark": "💙",
-            "youtube_url": "https://www.youtube.com/@%EA%B9%80%EB%A3%A8%EC%95%BC",
-            "official_community_url": "https://cafe.naver.com/f-e/cafes/30960354/menus/8?viewType=L",
-            "twitter_url": "hhttps://x.com/LUYA_Y"
-        }
-    },
-    {
         "key": "oyo",
         "name": "오요",
         "live_url": "https://chzzk.naver.com/live/623c408c07bbf5b3c1a989afcffe079a",
@@ -113,20 +206,6 @@
             "official_community_url": "https://cafe.naver.com/f-e/cafes/29983845/menus/2?viewType=L",
             "twitter_url": "https://x.com/0y0oyo",
             "chzzk_url": "https://chzzk.naver.com/live/623c408c07bbf5b3c1a989afcffe079a"
-        }
-    },
-    {
-        "key": "akuru",
-        "name": "아쿠루",
-        "live_url": "https://chzzk.naver.com/live/78cc61cc55bb3fad7f027d717ce61630",
-        "uid": "78cc61cc55bb3fad7f027d717ce61630",
-        "extra": {
-            "oshi_mark": "💀",
-            "youtube_url": "https://www.youtube.com/@쿠루",
-            "official_community_url": "https://cafe.naver.com/f-e/cafes/30891067/menus/9?viewType=L",
-            "twitter_url": "https://x.com/Akuru_666",
-            "chzzk_url": "https://chzzk.naver.com/live/78cc61cc55bb3fad7f027d717ce61630",
-            "youtube_music_url": "https://www.youtube.com/@아쿠루"
         }
     },
     {
@@ -224,18 +303,17 @@
     {
         "key": "lena",
         "name": "김레나",
-        "live_url": "https://chzzk.naver.com/live/324423cf78e5f3cd04423453cf8f1299",
-        "uid": "324423cf78e5f3cd04423453cf8f1299",
+        "live_url": "https://chzzk.naver.com/live/e5de4cb4736349d196e2aee04a7c8c36",
+        "uid": "e5de4cb4736349d196e2aee04a7c8c36",
         "extra": {
             "oshi_mark": "🦝",
             "youtube_url": "https://www.youtube.com/@김레나",
-            "official_community_url": "https://cafe.naver.com/f-e/cafes/30960354/menus/8?viewType=L",
-            "twitter_url": "https://x.com/LUYA_Y",
-            "chzzk_url": "https://chzzk.naver.com/live/324423cf78e5f3cd04423453cf8f1299"
+            "official_community_url": "https://cafe.naver.com/llenak98",
+            "twitter_url": "https://x.com/llenak98"
         }
     },
     {
-        "key" : "mollyhyang",
+        "key": "mollyhyang",
         "name": "바삭토스트",
         "live_url": "https://chzzk.naver.com/live/0aefa012d8edf56551dd42527920ffe6",
         "uid": "0aefa012d8edf56551dd42527920ffe6",
@@ -245,33 +323,6 @@
             "official_community_url": "https://cafe.naver.com/llenak98",
             "twitter_url": "https://x.com/llenak98",
             "chzzk_url": "https://chzzk.naver.com/live/0aefa012d8edf56551dd42527920ffe6"
-        }
-    }
-    ,
-    {
-        "key": "kanaph",
-        "name": "카나프",
-        "live_url": "https://chzzk.naver.com/live/852d27f701a047c7dba8ca41cd88e319",
-        "uid": "852d27f701a047c7dba8ca41cd88e319",
-        "extra": {
-            "oshi_mark": "💐",
-            "youtube_url": "https://www.youtube.com/@kanaph",
-            "official_community_url": "https://cafe.naver.com/f-e/cafes/30891067/menus/9?viewType=L",
-            "twitter_url": "https://x.com/_kanaph",
-            "chzzk_url": "https://chzzk.naver.com/live/852d27f701a047c7dba8ca41cd88e319"
-        }
-    },
-    {
-        "key": "azael",
-        "name": "아자엘",
-        "live_url": "https://chzzk.naver.com/live/96be3d27abcfe176659dbabb18464d0a",
-        "uid": "96be3d27abcfe176659dbabb18464d0a",
-        "extra": {
-            "oshi_mark": "🔱",
-            "youtube_url": "https://www.youtube.com/@A_zael",
-            "official_community_url": "https://cafe.naver.com/f-e/cafes/30891067/menus/9?viewType=L",
-            "twitter_url": "https://x.com/A_zael_",
-            "chzzk_url": "https://chzzk.naver.com/live/96be3d27abcfe176659dbabb18464d0a"
         }
     },
     {
