@@ -1,0 +1,12 @@
+metUnow.AppDir/
+dist/
+build/
+*.AppImage
+tokens/
+config.json
+streamers.json
+data/
+.venv/
+venv/
+__pycache__/
+*.pyc
